@@ -2,6 +2,9 @@ package edu.eci.arep.taller7;
 
 import static spark.Spark.*;
 
+import edu.eci.arep.taller7.autentication.Autenticator;
+import edu.eci.arep.taller7.persistence.MapDb;
+
 /**
  * first Secured app
  * 
@@ -13,10 +16,11 @@ public class App {
         secure("certifications/ecikeystore.p12", "123456", null, null); 
         port(getPort());
         staticFiles.location("/public");
+        MapDb.getInstance().insertProofs();
         get("/hello", (req, res) -> "Hello World");
         get("/loginservice", (req, res) -> {
             String name = req.queryParams("send"), pwd = req.queryParams("pd");
-            return null;
+            return Autenticator.getInstance().authenticate(name, pwd) ? "Welcome back "+ name : "User or password incorrect, please verify";
         });
     }
 

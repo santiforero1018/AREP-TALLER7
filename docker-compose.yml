@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: arep-taller7
+    container_name: app
+    ports:
+      - "57000:57000"
+
+  mysqldb:
+    image: mysql:8.0.28
+    container_name: mysqldb
+    networks:
+      - app-network
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=AREPdb
+
+networks:
+  app-network:
+    driver: bridge
