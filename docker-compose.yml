@@ -1,6 +1,16 @@
 version: '3.9'
 
 services:
+  mydb:
+      image: mysql:latest
+      container_name: mydb
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=1234
+        - MYSQL_DATABASE=AREPdb
+      volumes:
+        - mysql_data:/var/lib/mysql
   app:
     build:
       context: .
@@ -9,18 +19,9 @@ services:
     container_name: app
     ports:
       - "57000:57000"
-
-  mysqldb:
-    image: mysql:8.0.28
-    container_name: mysqldb
-    networks:
-      - app-network
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=AREPdb
-
-networks:
-  app-network:
-    driver: bridge
+    depends_on:
+      - mydb
+    volumes:
+      - ./app:/app
+volumes:
+  mysql_data:

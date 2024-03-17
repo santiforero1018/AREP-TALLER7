@@ -12,7 +12,7 @@ import edu.eci.arep.taller7.autentication.Autenticator;
  * @author Santiago Forero Yate
  */
 public class MapDb {
-    private static final String URL = "jdbc:mysql://mysqldb:3306/AREPdb";
+    private static final String URL = "jdbc:mysql://mydb:3306/AREPdb";
     private static final String USER = "root";
     private static final String PASSWORD = "1234";
     private static MapDb _instance = getInstance();
@@ -26,21 +26,26 @@ public class MapDb {
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String create = "CREATE TABLE IF NOT EXISTS users (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY," +
-                    "name VARCHAR(50) NOT NULL," +
-                    "password VARCHAR(50) NOT NULL" +
+                    "name VARCHAR(50) NOT NULL UNIQUE," +
+                    "password VARCHAR(400) NOT NULL UNIQUE" +
                     ")";
             PreparedStatement crTable = con.prepareStatement(create);
             crTable.executeUpdate();
+            System.out.println("creacion de la tabla exitosa");
             String sql = "INSERT INTO users (name, password) VALUES (?, ?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, "user1");
+            System.out.println(Autenticator.getInstance().hashPwd("password1").length());
             stmt.setString(2, Autenticator.getInstance().hashPwd("password1"));
             stmt.executeUpdate();
             stmt.setString(1, "user2");
+            System.out.println(Autenticator.getInstance().hashPwd("password2").length());
             stmt.setString(2, Autenticator.getInstance().hashPwd("password2"));
             stmt.executeUpdate();
+            System.out.println("inserts correctos");
         } catch (Exception e) {
             System.out.println("An error happened trying to execute SQL: " + e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -65,7 +70,12 @@ public class MapDb {
         }
     }
 
+    /**
+     * return an instance if a connection with Db can be stablishe
+     * @return the instance  of DataBaseHandler class, null otherwise
+     */
     public static MapDb getInstance(){
         return _instance;
+        
     }
 }

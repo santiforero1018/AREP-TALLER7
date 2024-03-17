@@ -1,6 +1,8 @@
 package edu.eci.arep.taller7.autentication;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import edu.eci.arep.taller7.persistence.MapDb;
 /**
@@ -19,6 +21,7 @@ public class Autenticator {
      * @return  true if the user is valid, false otherwise
      */
     public static  boolean authenticate(String user, String password){
+        System.out.println(hashPwd(password));
         return MapDb.getUserFromDb(user, hashPwd(password)).isPresent();
     }
 
@@ -28,23 +31,24 @@ public class Autenticator {
      * @return a hash of the initial chain on String format
      */
     public static String hashPwd(String chain){
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
-        } catch (Exception e) {
-            System.out.println("something happened trying to encrypt: "+e.getMessage());
-            return null;
+            byte[] hashBytes = md.digest(chain.getBytes());
+            return Base64.getEncoder().encodeToString(hashBytes);
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
-        byte[] hash =  md.digest(chain.getBytes());
-        StringBuffer  sb = new StringBuffer();
-        for(byte b : hash) {        
-            sb.append(String.format("%02x", b));
-        }
-            
-        return sb.toString();
+        return null;
+       
     }
 
+    /**
+     * return an unique instace of Autenticator class
+     * @return  instance of Autenticator class
+     */
     public static Autenticator getInstance(){
         return _instance;
     }

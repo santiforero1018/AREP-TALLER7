@@ -1,0 +1,13 @@
+* {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-image: url("../public/AREP.jpeg");
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

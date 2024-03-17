@@ -43,7 +43,7 @@ public class SecureUrlReader {
        
 
          // We can now read this URL
-         readURL("https://localhost:5000/hello");
+         readURL("https://localhost:57000/hello");
 
          // This one can't be read because the Java default truststore has been 
          // changed.
