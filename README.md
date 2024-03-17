@@ -49,7 +49,7 @@ Ahora, entrando a [](https://localhost:57000/) nos redirecciona a nuestra pagina
 
 ![advertencia](README-resources/warning.png)
 
-    aqui lo que se debe hacer es darle a la opcion de "continuar de todas formas" para poder acceder al Login
+aqui lo que se debe hacer es darle a la opcion de "continuar de todas formas" para poder acceder al Login
 
 ### Pruebas 
 
