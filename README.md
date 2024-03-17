@@ -73,6 +73,10 @@ A continuación se presenta un video del despliegue del proyecto en una maquina 
 
 
 
+https://github.com/santiforero1018/AREP-TALLER7/assets/88952698/6b023d43-ff35-4981-a9e7-629d8a3aeb79
+
+
+
 ## OBSERVACIONES PARA EL FUTURO
 Actualmente el proyecto solo cuenta con validaciones en la parte del back de la aplicación, lo que se requiere para el futuro de este proyecto es no enviar de manera explicita la contraseña al realizar una solicitud, seguir potenciando la seguridad de la aplicación he implementar nuevas funcionalidades. Por ahora, esto fue un acercamiento al manejo de autenticación de usuarios almacenando contraseñas cifradas en una base de datos.
 ## AUTOR
