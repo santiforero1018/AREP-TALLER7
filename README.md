@@ -40,12 +40,14 @@ docker-compose up -d
 ```
 con este comando, se construye la aplicación que se implementa y ejecuta dentro de contenedores Docker. al ser levantada, ya puede acceder al servicio, pero ahora podra acceder de forma segura usando el protocolo https.
 
+- **NOTA**: El servicio primero inicia el contenedor de la base de datos y luego procede a inicar el contenedor de la aplicación, la cual esperara un momento que detecte el servicio de la base de datos por medio de un ShellScript y al detectar el contenedor de la base de datos funcionando, ejecuta la aplicación.
+
 Para realizar pruebas de una autenticación correcta, se queman dos usuarios dentro de la ejecución del codigo:
 ![quemado](README-resources/codigo-quemando-usuarios.png)
 
 Ahora, entrando a [](https://localhost:57000/) nos redirecciona a nuestra pagina web para simular el inicio de sesion y realizar las pruebas correspondientes. 
 
-- NOTA: como no es un cifrado ni un certificado que los navegadores conocen, normalmente al tratar de entrar, saldra un aviso en su navegador como el que se muestra a continuación (Aviso mostrado en un navegador de FireFox):
+- **NOTA**: como no es un cifrado ni un certificado que los navegadores conocen, normalmente al tratar de entrar, saldra un aviso en su navegador como el que se muestra a continuación (Aviso mostrado en un navegador de FireFox):
 
 ![advertencia](README-resources/warning.png)
 

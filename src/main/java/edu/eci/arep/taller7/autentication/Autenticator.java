@@ -21,7 +21,6 @@ public class Autenticator {
      * @return  true if the user is valid, false otherwise
      */
     public static  boolean authenticate(String user, String password){
-        System.out.println(hashPwd(password));
         return MapDb.getUserFromDb(user, hashPwd(password)).isPresent();
     }
 

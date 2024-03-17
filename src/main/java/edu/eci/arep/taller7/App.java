@@ -13,13 +13,7 @@ import edu.eci.arep.taller7.persistence.MapDb;
  */
 public class App {
     public static void main(String[] args) {
-        try {
-            Thread.sleep(35000);
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("An error: "+e.getMessage());
-            Thread.currentThread().interrupt();
-        }
+        
         secure("certifications/ecikeystore.p12", "123456", null, null); 
         port(getPort());
         staticFiles.location("/public");
